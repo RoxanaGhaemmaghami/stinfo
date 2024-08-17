@@ -1,0 +1,339 @@
+<html>
+    <head>
+        <title>students informations</title>
+
+        
+        <style>
+            *{
+                font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            body{
+                background-color:bisque;
+            }
+            
+            #student_table{
+                border-radius:50px;
+                text-align: center;
+                margin: auto;
+                width: 90%;
+                
+
+
+            }
+            input{
+                border: 3px solid black;
+                border-radius: 45px;
+                border-style: double;
+                border-width: thick;
+                margin-top: -12px;
+                width: 5cm;
+                
+            }
+            input:hover{
+                background-color: rgb(179, 177, 177);
+            }
+
+            th{
+                border-collapse: collapse;
+                margin: 60px;
+                font-size: 0.4cm;
+                border-bottom :10px solid;
+                text-align: center;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                color: rgb(51, 1, 1);
+                
+            }
+
+            td{
+                border: 3px solid black;
+                text-align: center;
+                width: 100px;
+            }
+            td:hover{ background-color:  rgba(236, 203, 16, 0.623);}
+
+            tr{
+                border: 3px solid black;
+            }
+            tr:hover {background-color: rgba(242, 253, 88, 0.705);}
+
+
+            
+            div{
+                text-align: center;
+            }
+
+            #add_information{
+            width: 150px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            }
+            #edit{
+                width: 150px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                
+            }
+            #add_information:hover {
+                background-color: black;
+                color: white;
+            }
+            #edit:hover {
+                background-color: black;
+                color: white;
+            }
+            
+
+            #delbtn{
+                width: auto;
+                text-align: left;
+                border: 1px solid black;
+                color: black;
+                background-color: white;
+                margin-top: auto;
+                font-size: x-large;
+                background-color: bisque;
+            }
+            #up{
+                width: auto;
+                text-align: right;
+                border: 1px solid black;
+                color: black;
+                background-color: white;
+                margin-top: auto;
+                font-size: larger;
+                background-color:bisque;
+            }
+            #delbtn:hover{
+                background-color: maroon;
+            }
+            #up:hover{
+                background-color: green;
+            }
+            
+            
+            
+            
+        </style>
+    
+
+    </head>
+    <body>
+    <div>
+    <form id="stinfo">
+        <H1 style="text-align: center;">Students informations</H1>
+        
+            
+            <h3>first name : </h3>
+            <input type="text" id="fname" required><br>
+        
+    
+            <h3>last name : </h3>
+            <input type="text" id="lname" required><br>
+        
+        
+            <h3>date of birth : </h3>
+            <input type="date" id="birth" required><br>
+        
+            <h3>student number : </h3>
+            <input type="number" id="stnum"  ><br>
+        
+    
+            <h3>university : </h3>
+            <input type="text" id="uni" required><br>
+        
+           <h3>major : </h3>
+            <input type="text" id="major" required onkeydown="enter()"><br>
+        
+            
+            <input type="button"   id="add_information" value="add information" onclick="adding()"/><br>
+            <input type="button" id="edit" value="edit information" style="display: none;"/><br>
+            <div>
+        </div>
+        <input type="number" placeholder="enter your student number" id="inpt" oninput="search()"><br>
+        </div>
+    </form>
+    <form>
+        <table id="student_table">
+            <tr>
+                <th>name</th>
+                <th>last name</th>
+                <th>date of birth</th>
+                <th>student number</th>
+                <th>university</th>
+                <th>major</th>
+                <th>actions</th>
+            </tr>
+            
+            
+        </table>
+    </form>
+
+
+    <script>
+            
+        
+            function enter(){
+                if (event.key === "Enter"){
+                    adding()
+                }
+            }
+
+         var add = document.getElementById("add_information") 
+         const form = document.getElementById('stinfo');
+         add.addEventListener('add_information' , adding)
+         
+        function adding(){
+            
+            var fname = document.getElementById('fname').value 
+            var lname = document.getElementById('lname').value
+            var birth = document.getElementById('birth').value
+            var stnum = document.getElementById('stnum').value
+            var uni   = document.getElementById('uni').value
+            var major = document.getElementById('major').value
+            var student_table = document.getElementById('student_table')
+            console.log(document.getElementById('stnum').ariaValueMin)
+             if(((fname && lname && birth && stnum && uni && major) == '') || stnum<1){
+                 alert("error!")
+
+             }
+             
+             else{
+                    var newrow   = student_table.insertRow(-1)
+                    var newcell0 = newrow.insertCell(0)
+                    var newcell1 = newrow.insertCell(1)
+                    var newcell2 = newrow.insertCell(2)
+                    var newcell3 = newrow.insertCell(3)
+                    var newcell4 = newrow.insertCell(4)
+                    var newcell5 = newrow.insertCell(5)
+
+                    newcell0.innerHTML = fname
+                    newcell1.innerHTML = lname
+                    newcell2.innerHTML = birth
+                    newcell3.innerHTML = stnum
+                    newcell4.innerHTML = uni
+                    newcell5.innerHTML = major
+
+
+                    document.getElementById("fname").value = "";
+                    document.getElementById("lname").value = "";
+                    document.getElementById("birth").value = "";
+                    document.getElementById("stnum").value = "";
+                    document.getElementById("uni").value   = "";
+                    document.getElementById("major").value = "";
+
+
+                    var newcell6 = document.createElement('td')
+                    newrow.appendChild(newcell6)
+                    var delbtn = document.createElement('input')
+                    delbtn.type = 'button'
+                    delbtn.value = 'X'
+                    delbtn.id = 'delbtn'
+                    newcell6.appendChild(delbtn)
+                    delbtn.addEventListener("click" , dell)
+
+                    function dell(btn){
+                        var row = newcell6.parentNode;
+                        student_table.deleteRow(row.rowIndex);
+                            
+                    }
+
+                    var up = document.createElement('input')
+                    up.type = 'button'
+                    up.value = 'edit'
+                    up.id = 'up'
+                    newcell6.appendChild(up)
+                    up.addEventListener('click' , update)
+                    
+
+                    function update(){
+                        var edit = document.getElementById('edit')
+                        add_information.style.display= 'none'
+                        edit.style.display = ''
+
+                        var row = newcell6.parentNode
+                        var tr = student_table.getElementsByTagName("tr")[row.rowIndex]
+                        var td = tr.getElementsByTagName('td')
+                        document.getElementById('fname').value=td[0].innerText
+                        document.getElementById('lname').value=td[1].innerText
+                        document.getElementById('birth').value=td[2].innerText
+                        document.getElementById('stnum').value=td[3].innerText
+                        document.getElementById('uni').value=td[4].innerText
+                        document.getElementById('major').value=td[5].innerText
+
+
+                        fname = document.getElementById('fname').value
+                        lname = document.getElementById('lname').value
+                        birth = document.getElementById('birth').value
+                        stnum = document.getElementById('stnum').value
+                        uni = document.getElementById('uni').value
+                        major = document.getElementById('major').value
+                    
+                        
+                        edit.onclick = editing
+                        
+
+                        function editing(){
+                            if(((document.getElementById("fname").value && document.getElementById("lname").value 
+                            && document.getElementById("birth").value && document.getElementById("stnum").value
+                             && document.getElementById("uni").value && document.getElementById("major").value) == '') ||document.getElementById("stnum").value<1){
+                                alert("error!")}
+                                else{
+                            td[0].textContent = document.getElementById("fname").value
+                            td[1].textContent = document.getElementById("lname").value
+                            td[2].textContent = document.getElementById("birth").value
+                            td[3].textContent = document.getElementById("stnum").value
+                            td[4].textContent = document.getElementById("uni").value
+                            td[5].textContent = document.getElementById("major").value
+
+                            document.getElementById("fname").value = "";
+                            document.getElementById("lname").value = "";
+                            document.getElementById("birth").value = "";
+                            document.getElementById("stnum").value = "";
+                            document.getElementById("uni").value   = "";
+                            document.getElementById("major").value = "";
+
+
+                            edit.style.display = 'none'
+                            add_information.style.display=''
+                                }
+                        }
+                    }
+
+                    
+
+
+
+
+                
+            }
+            
+        }
+        
+                
+                
+
+        function search(){
+            
+            var value = document.getElementById('inpt').value
+            var tr = student_table.getElementsByTagName("tr")
+
+            for (var i = 1 ; i<tr.length ; i++){
+                
+                
+                var td = tr[i].getElementsByTagName('td')[3]
+                if(td){
+                    
+                    if(td.innerHTML.indexOf(value)==0){
+                        tr[i].style.display = ''
+                    }else{
+                        tr[i].style.display ='none'
+                    }
+                }
+            }
+           
+        }
+    </script>
+        
+    </body>
+</html>
